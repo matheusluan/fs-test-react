@@ -9,7 +9,7 @@ export function Header() {
             <div className='flex gap-2'>
                 <img src={logo} alt='NLW EXPERT' />
                 <h1 className='font-bold text-xl'>
-                    Matheus Cassino
+                    Matheus Games
                 </h1>
             </div>
 

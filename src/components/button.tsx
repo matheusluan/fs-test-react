@@ -1,13 +1,16 @@
+import { Link } from 'react-router-dom';
 
 type Props = {
     title: string;
     onClick?: () => void;
+    additionalClass?: string;
+    route?: string;
 }
 
-export function Button({ title }: Props) {
+export function Button({ title, additionalClass, route }: Props) {
     return (
-        <button className='w-24 h-10 rounded-xl bg-red-600'>
+        <Link to={route ? route : '/play'} className={`w-24 h-10 rounded-xl flex items-center justify-center bg-red-600 ${additionalClass}`}>
             {title}
-        </button>
+        </Link>
     )
 }
