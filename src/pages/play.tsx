@@ -13,8 +13,8 @@ import { Columns2, Loader, Rows2 } from "lucide-react";
 import { RewardRules } from "../components/reward-rules";
 
 const reel1 = ["cherry", "lemon", "apple"];
-const reel2 = ["lemon", "apple", "lemon"];
-const reel3 = ["lemon", "apple", "lemon"];
+const reel2 = ["lemon", "apple", "apple"];
+const reel3 = ["cherry", "lemon", "banana"];
 
 export function Play() {
 
