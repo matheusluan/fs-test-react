@@ -12,9 +12,9 @@ import { CardReel } from "../components/card-reel";
 import { Columns2, Loader, Rows2 } from "lucide-react";
 import { RewardRules } from "../components/reward-rules";
 
-const reel1 = ["cherry", "lemon", "apple", "lemon", "banana", "banana", "lemon", "lemon"];
-const reel2 = ["lemon", "apple", "lemon", "lemon", "cherry", "apple", "banana", "lemon"];
-const reel3 = ["lemon", "apple", "lemon", "apple", "cherry", "lemon", "banana", "lemon"];
+const reel1 = ["cherry", "lemon", "apple"];
+const reel2 = ["lemon", "apple", "lemon"];
+const reel3 = ["lemon", "apple", "lemon"];
 
 export function Play() {
 
@@ -59,9 +59,9 @@ export function Play() {
             const { coins, spinedReel1, spinedReel2, spinedReel3 } = response.data;
 
             // Set the state with the received data            
-            setSpinedReel1(spinedReel1);
-            setSpinedReel2(spinedReel2);
-            setSpinedReel3(spinedReel3);
+            setSpinedReel1(spinedReel1.slice(0, 3));
+            setSpinedReel2(spinedReel2.slice(0, 3));
+            setSpinedReel3(spinedReel3.slice(0, 3));
 
             //-1 coin for spin 
             dispatch(decrement());
@@ -126,26 +126,27 @@ export function Play() {
 
                 <div className={`grid ${vertical ? 'grid-cols-3' : 'grid-rows-3'} gap-2 md:gap-5 `}>
 
-                    <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-8' : 'grid-rows-8'} gap-2 p-2 md:gap-5 md:p-5 items-center justify-center overflow-hidden`}>
+                    <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-3' : 'grid-rows-3'} gap-2 p-2 md:gap-5 md:p-5 items-center justify-center overflow-hidden`}>
                         {
                             (spinedReel1.length > 0 ? spinedReel1 : reel1).map((fruit, index) => (
-                                <CardReel key={index} fruit={fruit} selected={index === 3 && !isSpinning} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-fast' : 'animate-infinite-scroll-fast') : ''} />
+                                <CardReel key={index} fruit={fruit} selected={index  === 1 && !isSpinning} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-fast' : 'animate-infinite-scroll-fast') : ''} />
                             ))
                         }
                     </div>
 
-                    <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-8' : 'grid-rows-8'} gap-2 p-2 md:gap-5 md:p-5 items-center justify-center overflow-hidden`}>
+                    <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-3' : 'grid-rows-3'} gap-2 p-2 md:gap-5 md:p-5 items-center justify-center overflow-hidden`}>
 
                         {
                             (spinedReel2.length > 0 ? spinedReel2 : reel2).map((fruit, index) => (
-                                <CardReel key={index} fruit={fruit} selected={index === 3 && !isSpinning} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-slow' : 'animate-infinite-scroll-slow') : ''} />
+                                <CardReel key={index} fruit={fruit} selected={index === 1 && !isSpinning} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-slow' : 'animate-infinite-scroll-slow') : ''} />
                             ))
                         }
                     </div>
-                    <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-8' : 'grid-rows-8'} gap-2 p-2 md:gap-5 md:p-5 items-center justify-center overflow-hidden`}>
+
+                    <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-3' : 'grid-rows-3'} gap-2 p-2 md:gap-5 md:p-5 items-center justify-center overflow-hidden`}>
                         {
                             (spinedReel3.length > 0 ? spinedReel3 : reel3).map((fruit, index) => (
-                                <CardReel key={index} fruit={fruit} selected={index === 3 && !isSpinning} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-faster' : 'animate-infinite-scroll-faster') : ''} />
+                                <CardReel key={index} fruit={fruit} selected={index  === 1 && !isSpinning} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-faster' : 'animate-infinite-scroll-faster') : ''} />
                             ))
                         }
                     </div>
