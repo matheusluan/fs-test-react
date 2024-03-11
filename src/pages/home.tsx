@@ -23,7 +23,7 @@ export function Home() {
     //Get all games
     async function fetchGames() {
         try {
-            const response = await fetch(`http://localhost:3333/games`);
+            const response = await fetch(`${process.env.BASE_URL}/games`);
 
             if (!response.ok) {
                 toast.success('Failed to fetch games.');
@@ -44,7 +44,10 @@ export function Home() {
     //Search games
     async function fetchSearchGames() {
         try {
-            const response = await fetch(`http://localhost:3333/games/${search}`);
+
+            console.log(process.env.BASE_URL);
+
+            const response = await fetch(`${process.env.BASE_URL}/games/${search}`);
 
             if (!response.ok) {
                 toast.success('Failed to fetch games.');
