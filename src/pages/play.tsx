@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../stores/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../stores/store";
 
 import { api } from "../services/api";
 import { decrement, incrementAsync } from "../stores/coin/coinSlice";
@@ -9,7 +9,8 @@ import { toast } from "sonner";
 import { Header } from "../components/header";
 import { Divider } from "../components/divider";
 import { CardReel } from "../components/card-reel";
-import { Columns2, Loader, Rows2 } from "lucide-react";
+import { Columns2, Loader, Rows2, Apple, Banana, Cherry, Citrus } from "lucide-react";
+import { RewardRules } from "../components/reward-rules";
 
 const reel1 = ["cherry", "lemon", "apple", "lemon", "banana", "banana", "lemon", "lemon"];
 const reel2 = ["lemon", "apple", "lemon", "lemon", "cherry", "apple", "banana", "lemon"];
@@ -19,6 +20,9 @@ export function Play() {
 
     //Dispatch for redux
     const dispatch = useDispatch<AppDispatch>();
+
+    //Get coins from global state
+    const coinsNow = useSelector((state: RootState) => state.coin.value);
 
     //State for spinning animation
     const [isSpinning, setIsSpinning] = useState(false);
@@ -35,6 +39,12 @@ export function Play() {
     async function spinReels() {
 
         if (isSpinning) {
+            return;
+        }
+
+        //Verify the user coins
+        if (coinsNow <= 0) {
+            toast.error('You dont have any coin!')
             return;
         }
 
@@ -60,8 +70,12 @@ export function Play() {
                 //Att coins with backend result
                 dispatch(incrementAsync(coins));
 
-                // Sucess
-                toast.success(`You got ${coins} coins!!`);
+                // Toast
+                if (coins > 0) {
+                    toast.success(`You got ${coins} coins!!`);
+                } else {
+                    toast.warning(`You did not get any coins!!`);
+                }
 
                 setIsSpinning(false);
             }, 3000);
@@ -69,7 +83,7 @@ export function Play() {
         } catch (error) {
             // Handle errors
             toast.error('Error occurred, please try again!');
-        } 
+        }
     }
 
     function handleVertical(opt: boolean) {
@@ -89,7 +103,7 @@ export function Play() {
 
             <div className="w-full min-h-96 rounded-lg mx-auto md:max-w-7xl my-5 p-2 md:p-5 bg-neutral-800 flex flex-col items-center justify-center gap-5">
 
-                <div className="w-full flex justify-between items-center">
+                <div className="w-full flex flex-col justify-center items-center gap-2">
                     <h1>
                         Slot Machine
                     </h1>
@@ -115,7 +129,7 @@ export function Play() {
                     <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-8' : 'grid-rows-8'} gap-2 p-2 md:gap-5 md:p-5 items-center justify-center overflow-hidden`}>
                         {
                             (spinedReel1.length > 0 ? spinedReel1 : reel1).map((fruit, index) => (
-                                <CardReel key={index} fruit={fruit} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-fast' : 'animate-infinite-scroll-fast') : 'animate-pulse'} />
+                                <CardReel key={index} fruit={fruit} selected={index === 3 && !isSpinning} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-fast' : 'animate-infinite-scroll-fast') : ''} />
                             ))
                         }
                     </div>
@@ -124,14 +138,14 @@ export function Play() {
 
                         {
                             (spinedReel2.length > 0 ? spinedReel2 : reel2).map((fruit, index) => (
-                                <CardReel key={index} fruit={fruit} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-slow' : 'animate-infinite-scroll-slow') : 'animate-pulse'} />
+                                <CardReel key={index} fruit={fruit} selected={index === 3 && !isSpinning} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-slow' : 'animate-infinite-scroll-slow') : ''} />
                             ))
                         }
                     </div>
                     <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-8' : 'grid-rows-8'} gap-2 p-2 md:gap-5 md:p-5 items-center justify-center overflow-hidden`}>
                         {
                             (spinedReel3.length > 0 ? spinedReel3 : reel3).map((fruit, index) => (
-                                <CardReel key={index} fruit={fruit} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-faster' : 'animate-infinite-scroll-faster') : 'animate-pulse'} />
+                                <CardReel key={index} fruit={fruit} selected={index === 3 && !isSpinning} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-faster' : 'animate-infinite-scroll-faster') : ''} />
                             ))
                         }
                     </div>
@@ -146,9 +160,10 @@ export function Play() {
                             : 'Play'
                     }
                 </button>
+
+                <RewardRules />
+
             </div>
-
-
         </main>
     )
 }

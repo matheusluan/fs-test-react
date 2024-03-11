@@ -98,7 +98,7 @@ export function Home() {
 
             <Divider />
 
-            <section className='max-w-5xl my-5 px-5'>
+            <section className='w-full md:w-full md:max-w-5xl my-5 px-5'>
 
                 <Banner />
 
