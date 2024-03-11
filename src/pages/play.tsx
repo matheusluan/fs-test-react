@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { Header } from "../components/header";
 import { Divider } from "../components/divider";
 import { CardReel } from "../components/card-reel";
-import { Columns2, Loader, Rows2, Apple, Banana, Cherry, Citrus } from "lucide-react";
+import { Columns2, Loader, Rows2 } from "lucide-react";
 import { RewardRules } from "../components/reward-rules";
 
 const reel1 = ["cherry", "lemon", "apple", "lemon", "banana", "banana", "lemon", "lemon"];
