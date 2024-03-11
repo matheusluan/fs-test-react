@@ -1,5 +1,11 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../stores/store";
 
+import { api } from "../services/api";
+import { decrement, incrementAsync } from "../stores/coin/coinSlice";
+
+import { toast } from "sonner";
 import { Header } from "../components/header";
 import { Divider } from "../components/divider";
 import { CardReel } from "../components/card-reel";
@@ -10,6 +16,9 @@ const reel2 = ["lemon", "apple", "lemon", "lemon", "cherry", "apple", "banana", 
 const reel3 = ["lemon", "apple", "lemon", "apple", "cherry", "lemon", "banana", "lemon"];
 
 export function Play() {
+
+    //Dispatch for redux
+    const dispatch = useDispatch<AppDispatch>();
 
     //State for spinning animation
     const [isSpinning, setIsSpinning] = useState(false);
@@ -23,36 +32,44 @@ export function Play() {
     const [spinedReel3, setSpinedReel3] = useState<string[]>([]);
 
     //Function for spin reels
-    function spinReels() {
+    async function spinReels() {
 
         if (isSpinning) {
-            return
+            return;
         }
 
         setIsSpinning(true);
 
-        // Timeout for animation reels
-        setTimeout(() => {
+        try {
 
-            // shuffle reels
-            setSpinedReel1(shuffleArray([...reel1]));
-            setSpinedReel2(shuffleArray([...reel2]));
-            setSpinedReel3(shuffleArray([...reel3]));
+            // Call backend endpoint
+            const response = await api.post('/play');
 
-            setIsSpinning(false);
-        }, 3000);
+            // Destructure the response data
+            const { coins, spinedReel1, spinedReel2, spinedReel3 } = response.data;
 
-    }
+            // Set the state with the received data            
+            setSpinedReel1(spinedReel1);
+            setSpinedReel2(spinedReel2);
+            setSpinedReel3(spinedReel3);
 
-    function shuffleArray<T>(array: T[]): T[] {
+            //-1 coin for spin 
+            dispatch(decrement());
 
-        // Copy the first array -> for immutability 
-        const newArray = [...array];
+            setTimeout(() => {
+                //Att coins with backend result
+                dispatch(incrementAsync(coins));
 
-        // Sort the new array with ramdom function
-        newArray.sort(() => Math.random() - 0.5);
+                // Sucess
+                toast.success(`You got ${coins} coins!!`);
 
-        return newArray;
+                setIsSpinning(false);
+            }, 3000);
+
+        } catch (error) {
+            // Handle errors
+            toast.error('Error occurred, please try again!');
+        } 
     }
 
     function handleVertical(opt: boolean) {

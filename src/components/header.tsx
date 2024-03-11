@@ -1,8 +1,15 @@
 
+import { useSelector } from "react-redux";
+import { RootState } from "../stores/store";
+
 import logo from '../assets/logo.svg'
 import { Button } from './button';
 
 export function Header() {
+
+    //Get coins from global state
+    const coins = useSelector((state: RootState) => state.coin.value);
+
     return (
         <header className="w-full flex mx-auto md:max-w-7xl my-5 justify-between items-center px-5">
 
@@ -17,9 +24,9 @@ export function Header() {
                 <Button title='Play now' />
 
                 <div className='w-10 h-10 flex justify-center items-center rounded-xl bg-stone-800 font-bold text-sm'>
-                   20
+                    {coins}
                 </div>
-                
+
             </div>
 
         </header>
