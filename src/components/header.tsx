@@ -7,7 +7,7 @@ export function Header() {
         <header className="w-full flex mx-auto md:max-w-7xl my-5 justify-between items-center px-5">
 
             <div className='flex gap-2'>
-                <img src={logo} alt='NLW EXPERT' />
+                <img src={logo} alt='logo' />
                 <h1 className='font-bold text-xl'>
                     Matheus Games
                 </h1>

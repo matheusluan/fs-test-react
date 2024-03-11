@@ -10,7 +10,7 @@ export default {
         sans: ['Inter', 'sans-serif']
       },
       backgroundImage: {
-        'cassino-background': "url('./src/assets/background.png')",
+        'cassino-background': "url('./public/background.png')",
       },
       animation: {
         'infinite-scroll-slow': 'infinite-scroll 1s linear infinite',
