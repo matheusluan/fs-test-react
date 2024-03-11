@@ -26,7 +26,7 @@ export function Home() {
             const response = await fetch(`${process.env.BASE_URL}/games`);
 
             if (!response.ok) {
-                toast.success('Failed to fetch games.');
+                toast.error('Failed to fetch games.');
             }
 
             const games: Game[] = await response.json();
