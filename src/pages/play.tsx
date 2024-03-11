@@ -70,7 +70,7 @@ export function Play() {
 
             <Divider />
 
-            <div className="w-full min-h-96 rounded-lg mx-auto md:max-w-7xl my-5 p-5 bg-neutral-800 flex flex-col items-center justify-center gap-5">
+            <div className="w-full min-h-96 rounded-lg mx-auto md:max-w-7xl my-5 p-2 md:p-5 bg-neutral-800 flex flex-col items-center justify-center gap-5">
 
                 <div className="w-full flex justify-between items-center">
                     <h1>
@@ -93,9 +93,9 @@ export function Play() {
                     </div>
                 </div>
 
-                <div className={`grid ${vertical ? 'grid-cols-3' : 'grid-rows-3'} gap-5 `}>
+                <div className={`grid ${vertical ? 'grid-cols-3' : 'grid-rows-3'} gap-2 md:gap-5 `}>
 
-                    <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-8' : 'grid-rows-8'} gap-5 p-5 items-center justify-center overflow-hidden`}>
+                    <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-8' : 'grid-rows-8'} gap-2 p-2 md:gap-5 md:p-5 items-center justify-center overflow-hidden`}>
                         {
                             (spinedReel1.length > 0 ? spinedReel1 : reel1).map((fruit, index) => (
                                 <CardReel key={index} fruit={fruit} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-fast' : 'animate-infinite-scroll-fast') : 'animate-pulse'} />
@@ -103,7 +103,7 @@ export function Play() {
                         }
                     </div>
 
-                    <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-8' : 'grid-rows-8'} gap-5 p-5 items-center justify-center overflow-hidden`}>
+                    <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-8' : 'grid-rows-8'} gap-2 p-2 md:gap-5 md:p-5 items-center justify-center overflow-hidden`}>
 
                         {
                             (spinedReel2.length > 0 ? spinedReel2 : reel2).map((fruit, index) => (
@@ -111,7 +111,7 @@ export function Play() {
                             ))
                         }
                     </div>
-                    <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-8' : 'grid-rows-8'} gap-5 p-5 items-center justify-center overflow-hidden`}>
+                    <div className={`border border-neutral-700 rounded-lg grid ${!vertical ? 'grid-cols-8' : 'grid-rows-8'} gap-2 p-2 md:gap-5 md:p-5 items-center justify-center overflow-hidden`}>
                         {
                             (spinedReel3.length > 0 ? spinedReel3 : reel3).map((fruit, index) => (
                                 <CardReel key={index} fruit={fruit} animation={isSpinning ? (vertical ? 'animate-infinite-scroll-y-faster' : 'animate-infinite-scroll-faster') : 'animate-pulse'} />

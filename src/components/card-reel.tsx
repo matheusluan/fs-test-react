@@ -27,7 +27,7 @@ export function CardReel({ fruit, animation }: Props) {
     }
 
     return (
-        <div className={`w-[60px] h-[60px] rounded-lg flex items-center justify-center ${animation} overflow-hidden `}>
+        <div className={`w-[40px] h-[40px] md:w-[60px] md:h-[60px] rounded-lg flex items-center justify-center ${animation} overflow-hidden `}>
             {fruitIcon}
         </div>
     )

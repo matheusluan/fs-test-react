@@ -26,7 +26,7 @@ export function ListGames({ loading, games }: Props) {
                 <>
                     {
                         games.length > 0
-                            ? <div className="my-5 w-full grid grid-cols-1 p-5 md:p-0 md:grid-cols-3 lg:grid-cols-5 rounded-xl gap-5">
+                            ? <div className="my-5 w-full grid grid-cols-1 p-5 md:p-0 md:grid-cols-4 lg:grid-cols-5 rounded-xl gap-5">
                                 {games.map((game) => (
                                     <CardGame key={game.id} game={game} />
                                 ))}

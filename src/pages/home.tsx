@@ -92,13 +92,13 @@ export function Home() {
     }, [search])
 
     return (
-        <main className='w-full'>
+        <main className='w-full flex flex-col items-center justify-between'>
 
             <Header />
 
             <Divider />
 
-            <section className='mx-auto max-w-5xl my-5'>
+            <section className='max-w-5xl my-5 px-5'>
 
                 <Banner />
 
