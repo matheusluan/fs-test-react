@@ -7,10 +7,9 @@ export function RewardRules() {
             <h1>
                 Rewards rules
             </h1>
-            <div className="flex gap-2">
-                <div className="flex justify-center items-center gap-3">
-
-                    <div className="flex flex-col gap-2 items-center justify-center">
+            <div className="flex gap-2"> 
+                <div className="flex justify-center items-center gap-3">   
+                  <div className="flex flex-col gap-2 items-center justify-center">
                         <p className="text-center">3x</p>
                         <div className={`w-[40px] h-[40px] md:w-[60px] md:h-[60px] border rounded-lg flex items-center justify-center overflow-hidden `}>
                             <Cherry color='#b91c1c' size={30} />
@@ -31,6 +30,8 @@ export function RewardRules() {
                         </div>
                         <p className="text-center">20 coins</p>
                     </div>
+                </div>
+                <div className="flex justify-center items-center gap-3">
                     <div className="flex flex-col gap-2 items-center justify-center">
                         <p className="text-center">2x</p>
                         <div className={`w-[40px] h-[40px] md:w-[60px] md:h-[60px] border rounded-lg flex items-center justify-center overflow-hidden `}>
