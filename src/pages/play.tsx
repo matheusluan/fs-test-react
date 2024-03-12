@@ -102,7 +102,7 @@ export function Play() {
             <Divider />
 
             <div className="w-full min-h-96 rounded-lg mx-auto md:max-w-7xl my-5 p-2 md:p-5 bg-neutral-800 flex flex-col items-center justify-center gap-5">
-                
+               
                 <div className="w-full flex flex-col justify-center items-center gap-2">
                     <h1>
                         Slot Machine
@@ -123,8 +123,6 @@ export function Play() {
 
                     </div>
                 </div>
-
-                <RewardRules />
                 
                 <div className={`grid ${vertical ? 'grid-cols-3' : 'grid-rows-3'} gap-2 md:gap-5 `}>
 
@@ -163,7 +161,8 @@ export function Play() {
                             : 'Play'
                     }
                 </button>
-
+                
+                <RewardRules />
 
             </div>
         </main>
