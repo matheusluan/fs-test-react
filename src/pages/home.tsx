@@ -9,6 +9,7 @@ import { ListGames } from '../components/list-games';
 import { toast } from 'sonner';
 
 import { Game } from '../types/game';
+import { Skeleton } from '../components/skeleton';
 
 export function Home() {
 
@@ -23,6 +24,8 @@ export function Home() {
     //Get all games
     async function fetchGames() {
         try {
+
+            setLoading(true);
             const response = await fetch(`${process.env.BASE_URL}/games`);
 
             if (!response.ok) {
@@ -38,15 +41,15 @@ export function Home() {
         } catch (error: any) {
             console.error('Error fetching games:', error.message);
             return [];
+        } finally {
+            setLoading(false);
         }
     }
 
     //Search games
     async function fetchSearchGames() {
         try {
-
-            console.log(process.env.BASE_URL);
-
+            setLoading(true);
             const response = await fetch(`${process.env.BASE_URL}/games/${search}`);
 
             if (!response.ok) {
@@ -62,6 +65,8 @@ export function Home() {
         } catch (error: any) {
             console.error('Error fetching games:', error.message);
             return [];
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -74,20 +79,15 @@ export function Home() {
 
     //Use effects
     useEffect(() => {
-        setLoading(true);
         fetchGames()
-        setLoading(false);
     }, [])
 
     useEffect(() => {
-
         if (!search) {
             return
         }
 
-        setLoading(true);
-        fetchSearchGames()
-        setLoading(false);
+        fetchSearchGames();
 
     }, [search])
 
@@ -109,7 +109,20 @@ export function Home() {
                     className="h-30 mt-5 text-stone-600 rounded-lg bg-neutral-800 px-4 py-2 w-full outline-none focus:outline-none focus:ring"
                 />
 
-                <ListGames games={search ? searchGames : games} loading={loading} />
+                {
+                    loading
+                        ?
+                        <div className="my-5 w-full md:max-h-[500px] grid grid-cols-2 md:grid-cols-4 rounded-xl gap-5">
+                            {[...Array(12)].map((_, index) => (
+                                <Skeleton key={index} />
+                            ))}
+                        </div>
+
+                        :
+
+                        <ListGames games={search ? searchGames : games} />
+                }
+
 
             </section>
 
