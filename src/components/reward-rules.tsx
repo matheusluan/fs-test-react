@@ -7,7 +7,7 @@ export function RewardRules() {
             <h1>
                 Rewards rules
             </h1>
-            <div className="flex gap-2"> 
+            <div className="flex flex-col  justify-center items-center gap-2"> 
                 <div className="flex justify-center items-center gap-3">   
                   <div className="flex flex-col gap-2 items-center justify-center">
                         <p className="text-center">3x</p>
